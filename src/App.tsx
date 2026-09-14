@@ -4,6 +4,7 @@ import Navbar from "./components/layout/Navbar";
 import Footer from "./components/layout/Footer";
 import CartDrawer from "./components/layout/CartDrawer";
 import Home from "./pages/Home";
+import Admin from "./admin/Admin";
 
 const ProductDetail = lazy(() => import("./pages/ProductDetail"));
 const CartPage = lazy(() => import("./pages/CartPage"));
@@ -18,10 +19,9 @@ function ScrollToTop() {
   return null;
 }
 
-export default function App() {
+function StorefrontLayout() {
   return (
     <div className="relative min-h-screen bg-void text-text">
-      <ScrollToTop />
       <Navbar />
       <CartDrawer />
       <main>
@@ -37,5 +37,17 @@ export default function App() {
       </main>
       <Footer />
     </div>
+  );
+}
+
+export default function App() {
+  return (
+    <>
+      <ScrollToTop />
+      <Routes>
+        <Route path="/admin/*" element={<Admin />} />
+        <Route path="/*" element={<StorefrontLayout />} />
+      </Routes>
+    </>
   );
 }
