@@ -1,6 +1,6 @@
 import type { FormEvent, ReactNode } from "react";
 import { useEffect, useMemo, useState } from "react";
-import { BarChart3, Box, DollarSign, PackagePlus, Search, Trash2, TrendingUp, Users } from "lucide-react";
+import { BarChart3, Box, DollarSign, PackagePlus, Search, Trash2, Users } from "lucide-react";
 import type { Product } from "../types";
 import { getOrders, getProducts, saveProducts, type StoreOrder } from "../services/store";
 
@@ -31,7 +31,10 @@ export default function Admin() {
     };
   }, []);
 
-  const filteredProducts = useMemo(() => products.filter((p) => p.name.toLowerCase().includes(search.toLowerCase()) || p.brand.toLowerCase().includes(search.toLowerCase())), [products, search]);
+  const filteredProducts = useMemo(
+    () => products.filter((p) => p.name.toLowerCase().includes(search.toLowerCase()) || p.brand.toLowerCase().includes(search.toLowerCase())),
+    [products, search],
+  );
   const units = products.reduce((sum, p) => sum + (p.stock === "out-of-stock" ? 0 : p.stock === "low-stock" ? 5 : 20), 0);
   const inventoryValue = products.reduce((sum, p) => sum + p.price * (p.stock === "out-of-stock" ? 0 : p.stock === "low-stock" ? 5 : 20), 0);
   const revenue = orders.reduce((sum, order) => sum + order.total, 0);
