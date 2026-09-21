@@ -9,7 +9,6 @@ import Admin from "./admin/Admin";
 const ProductDetail = lazy(() => import("./pages/ProductDetail"));
 const CartPage = lazy(() => import("./pages/CartPage"));
 const Dashboard = lazy(() => import("./pages/Dashboard"));
-const NotFound = lazy(() => import("./pages/NotFound"));
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -31,7 +30,7 @@ function StorefrontLayout() {
             <Route path="/product/:id" element={<ProductDetail />} />
             <Route path="/cart" element={<CartPage />} />
             <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="*" element={<NotFound />} />
+            <Route path="*" element={<Home />} />
           </Routes>
         </Suspense>
       </main>
